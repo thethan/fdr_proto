@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+// The package name determines the name of the directories that truss creates
+// for `package echo;` truss will create the directory "echo-service".
+package fdr;
+
+import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
+option go_package = "github.com/thethan/fdr_proto";
+
+
+service Players {
+    rpc CreatePlayer (CreatePlayerRequest) returns (CreatePlayerResponse) {
+        option (google.api.http) = {
+        // All fields (In) are query parameters of the http request unless otherwise specified
+        post: "/player"
+        body: "*"
+        };
+    }
+}
+
+message CreatePlayerRequest {}
+
+message CreatePlayerResponse {}
+
+message Player {
+    int32 id = 1 [json_name = "id"];
+    string name = 2 [json_name = "name"];
+    string image = 3 [json_name = "image"];
+    repeated PlayerPosition positions = 4 [json_name = "positions"];
+}
+
+enum PlayerPosition {
+    NA = 0;
+    QB = 1;
+    RB = 2;
+    WR = 3;
+    TE = 4;
+    K = 5;
+    DEF = 6;
+
+}
