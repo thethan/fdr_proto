@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+// The package name determines the name of the directories that truss creates
+// for `package echo;` truss will create the directory "echo-service".
+package fdr;
+
+import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
+option go_package = "github.com/thethan/fdr_proto";
+
+
+service Users {
+    rpc Create (CreateUserRequest) returns (CreateUserResponse) {
+        option (google.api.http) = {
+        // All fields (In) are query parameters of the http request unless otherwise specified
+        post: "/auth"
+        body: "*"
+        };
+    }
+
+    rpc Login (LoginRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+        // All fields (In) are query parameters of the http request unless otherwise specified
+        post: "/login"
+        body: "*"
+        };
+    }
+}
+
+message CreateUserRequest {
+    user user = 1;
+}
+
+message CreateUserResponse {
+    string status = 1;
+}
+
+message LoginRequest {
+    user user = 1;
+    string open_id = 2 [json_name = "open_id"];
+    string service = 3 [json_name = "service"];
+}
+
+message LoginResponse {
+    token token = 1 [json_name = "token"];
+}
+
+message token {
+    string accessToken = 1 [json_name = "access_token"];
+    string refreshToken = 2 [json_name = "refresh_token"];
+    int32  expiresIn = 3 [json_name = "expires_un"];
+}
+
+message user {
+    int32 id = 1 [json_name = "id"];
+    string name = 2 [json_name = "name"];
+    string image = 3 [json_name = "image"];
+    string email = 4 [json_name = "email "];
+}
+
