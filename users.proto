@@ -4,6 +4,7 @@ syntax = "proto3";
 // for `package echo;` truss will create the directory "echo-service".
 package fdr;
 
+import "google/protobuf/struct.proto";
 import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
 option go_package = "github.com/thethan/fdr_proto";
 
@@ -13,6 +14,14 @@ service Users {
         option (google.api.http) = {
         // All fields (In) are query parameters of the http request unless otherwise specified
         post: "/auth"
+        body: "*"
+        };
+    }
+
+    rpc Search (ListUserRequest) returns (ListUserResponse) {
+        option (google.api.http) = {
+        // All fields (In) are query parameters of the http request unless otherwise specified
+        post: "/search"
         body: "*"
         };
     }
@@ -44,6 +53,18 @@ message LoginResponse {
     token token = 1 [json_name = "token"];
 }
 
+message ListUserRequest {
+    user user = 1;
+    string open_id = 2 [json_name = "open_id"];
+    string service = 3 [json_name = "service"];
+}
+
+message ListUserResponse {
+    repeated user user = 1;
+    metadata metadata = 2;
+
+}
+
 message token {
     string accessToken = 1 [json_name = "access_token"];
     string refreshToken = 2 [json_name = "refresh_token"];
@@ -54,6 +75,12 @@ message user {
     int32 id = 1 [json_name = "id"];
     string name = 2 [json_name = "name"];
     string image = 3 [json_name = "image"];
-    string email = 4 [json_name = "email "];
+    string email = 4 [json_name = "email"];
 }
 
+message metadata {
+    int32 total = 1;
+    int32 page  = 2;
+    int32 per_page = 3;
+    google.protobuf.Struct filters = 4;
+}
