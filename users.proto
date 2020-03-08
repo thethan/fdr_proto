@@ -5,33 +5,20 @@ syntax = "proto3";
 package fdr;
 
 import "google/protobuf/struct.proto";
-import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
 option go_package = "github.com/thethan/fdr_proto";
 
 
 service Users {
     rpc Create (CreateUserRequest) returns (CreateUserResponse) {
-        option (google.api.http) = {
-        // All fields (In) are query parameters of the http request unless otherwise specified
-        post: "/auth"
-        body: "*"
-        };
     }
 
     rpc Search (ListUserRequest) returns (ListUserResponse) {
-        option (google.api.http) = {
-        // All fields (In) are query parameters of the http request unless otherwise specified
-        post: "/search"
-        body: "*"
-        };
     }
 
     rpc Login (LoginRequest) returns (LoginResponse) {
-        option (google.api.http) = {
-        // All fields (In) are query parameters of the http request unless otherwise specified
-        post: "/login"
-        body: "*"
-        };
+    }
+
+    rpc Credentials (CredentialRequest) returns (CredentialResponse) {
     }
 }
 
@@ -53,6 +40,14 @@ message LoginResponse {
     token token = 1 [json_name = "token"];
 }
 
+message CredentialRequest {
+    string session = 1;
+}
+
+message CredentialResponse {
+    token token = 1;
+}
+
 message ListUserRequest {
     user user = 1;
     string open_id = 2 [json_name = "open_id"];
@@ -68,7 +63,7 @@ message ListUserResponse {
 message token {
     string accessToken = 1 [json_name = "access_token"];
     string refreshToken = 2 [json_name = "refresh_token"];
-    int32  expiresIn = 3 [json_name = "expires_un"];
+    int32 expiresIn = 3 [json_name = "expires_un"];
 }
 
 message user {
@@ -80,7 +75,7 @@ message user {
 
 message metadata {
     int32 total = 1;
-    int32 page  = 2;
+    int32 page = 2;
     int32 per_page = 3;
     google.protobuf.Struct filters = 4;
 }
