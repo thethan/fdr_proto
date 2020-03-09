@@ -7,21 +7,6 @@ package fdr;
 import "google/protobuf/struct.proto";
 option go_package = "github.com/thethan/fdr_proto";
 
-
-service Users {
-    rpc Create (CreateUserRequest) returns (CreateUserResponse) {
-    }
-
-    rpc Search (ListUserRequest) returns (ListUserResponse) {
-    }
-
-    rpc Login (LoginRequest) returns (LoginResponse) {
-    }
-
-    rpc Credentials (CredentialRequest) returns (CredentialResponse) {
-    }
-}
-
 message CreateUserRequest {
     user user = 1;
 }
@@ -78,4 +63,11 @@ message metadata {
     int32 page = 2;
     int32 per_page = 3;
     google.protobuf.Struct filters = 4;
+}
+
+service Users {
+    rpc Create (CreateUserRequest) returns (CreateUserResponse) {}
+    rpc Search (ListUserRequest) returns (ListUserResponse) {}
+    rpc Login (LoginRequest) returns (LoginResponse) {}
+    rpc Credentials (CredentialRequest) returns (CredentialResponse) {}
 }
