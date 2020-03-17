@@ -46,9 +46,10 @@ message ListUserResponse {
 }
 
 message token {
-    string accessToken = 1 [json_name = "access_token"];
-    string refreshToken = 2 [json_name = "refresh_token"];
-    int32 expiresIn = 3 [json_name = "expires_un"];
+    string access_token = 1 [json_name = "access_token"];
+    string refresh_token = 2 [json_name = "refresh_token"];
+    int32 expires_in = 3 [json_name = "expires_in"];
+    string cookie = 4 [json_name = "cookie"];
 }
 
 message user {
@@ -66,8 +67,12 @@ message metadata {
 }
 
 service Users {
-    rpc Create (CreateUserRequest) returns (CreateUserResponse) {}
-    rpc Search (ListUserRequest) returns (ListUserResponse) {}
-    rpc Login (LoginRequest) returns (LoginResponse) {}
-    rpc Credentials (CredentialRequest) returns (CredentialResponse) {}
+    rpc Create (CreateUserRequest) returns (CreateUserResponse) {
+    }
+    rpc Search (ListUserRequest) returns (ListUserResponse) {
+    }
+    rpc Login (LoginRequest) returns (LoginResponse) {
+    }
+    rpc Credentials (CredentialRequest) returns (CredentialResponse) {
+    }
 }

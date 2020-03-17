@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package fdr;
+
+option go_package = "github.com/thethan/fdr_proto";
+
+import "users.proto";
+
+
+message ImportUserRequest {
+    token token = 1;
+}
+
+message ImportUserResponse {}
+
+
+service Import {
+    rpc ImportUserLeagues(ImportUserRequest) returns (ImportUserResponse){}
+}
