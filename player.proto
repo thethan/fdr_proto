@@ -4,38 +4,39 @@ syntax = "proto3";
 // for `package echo;` truss will create the directory "echo-service".
 package fdr;
 
-import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
 option go_package = "github.com/thethan/fdr_proto";
 
+import "stats.proto";
+import "season.proto";
+import "player_positions.proto";
 
 service Players {
-    rpc CreatePlayer (CreatePlayerRequest) returns (CreatePlayerResponse) {
-        option (google.api.http) = {
-        // All fields (In) are query parameters of the http request unless otherwise specified
-        post: "/player"
-        body: "*"
-        };
-    }
+    rpc CreatePlayer (CreatePlayerRequest) returns (CreatePlayerResponse) {}
 }
 
-message CreatePlayerRequest {}
+message CreatePlayerRequest {
+}
 
-message CreatePlayerResponse {}
+message CreatePlayerResponse {
+}
+
+message relations {
+    string id = 1;
+    string type = 2;
+    string url = 3;
+}
 
 message Player {
     int32 id = 1 [json_name = "id"];
     string name = 2 [json_name = "name"];
     string image = 3 [json_name = "image"];
     repeated PlayerPosition positions = 4 [json_name = "positions"];
+    repeated relations relations = 5;
+    repeated SeasonStats SeasonStats = 6;
 }
 
-enum PlayerPosition {
-    NA = 0;
-    QB = 1;
-    RB = 2;
-    WR = 3;
-    TE = 4;
-    K = 5;
-    DEF = 6;
-
+message SeasonStats {
+    season season = 1;
+    repeated stat stats = 2;
 }
+

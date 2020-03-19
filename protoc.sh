@@ -1,0 +1,1 @@
+protoc --go_out=plugins=grpc:. *.proto && mv github.com/thethan/fdr_proto/* . && rm -r github.com

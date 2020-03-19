@@ -6,16 +6,10 @@ package fdr;
 
 option go_package = "github.com/thethan/fdr_proto";
 
-import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
 import "player.proto";
 
 service DraftPlayer {
     rpc DraftPlayer (DraftPlayerRequest) returns (DraftPlayerResponse) {
-        option (google.api.http) = {
-        // All fields (In) are query parameters of the http request unless otherwise specified
-        get: "/draft"
-        body: "*"
-        };
     }
 }
 

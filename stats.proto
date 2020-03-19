@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package fdr;
+
+option go_package = "github.com/thethan/fdr_proto";
+
+import "player_positions.proto";
+
+
+message stat {
+    string id = 1;
+    bool active = 2;
+    string name = 3;
+    int32 sort_order = 4;
+    PlayerPosition position = 5;
+    message modifier {
+        float value = 1;
+    }
+}
+

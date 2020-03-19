@@ -1,0 +1,1 @@
+protoc --go_out=plugins=grpc:. season.proto && mv github.com/thethan/fdr_proto/ .

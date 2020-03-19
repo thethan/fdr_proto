@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package fdr;
+
+option go_package = "github.com/thethan/fdr_proto";
+
+//import "stats.proto";
+//import "season.proto";
+
+//message SeasonStats {
+//    Season season = 1;
+//    repeated stat stats = 3;
+//}

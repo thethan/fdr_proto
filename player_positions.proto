@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+
+package fdr;
+
+option go_package = "github.com/thethan/fdr_proto";
+
+
+enum PlayerPosition {
+    ALL = 0;
+    QB = 1;
+    RB = 2;
+    WR = 3;
+    TE = 4;
+    K = 5;
+    DEF = 6;
+}

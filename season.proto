@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package fdr;
+
+option go_package = "github.com/thethan/fdr_proto";
+
+import "stats.proto";
+
+message season {
+    string year = 1;
+    string type = 2; // will be nfl / nhl / etc
+    repeated stat stats = 3;
+}
