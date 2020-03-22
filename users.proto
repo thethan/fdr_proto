@@ -8,7 +8,7 @@ import "google/protobuf/struct.proto";
 option go_package = "github.com/thethan/fdr_proto";
 
 message CreateUserRequest {
-    user user = 1;
+    User user = 1;
 }
 
 message CreateUserResponse {
@@ -16,7 +16,7 @@ message CreateUserResponse {
 }
 
 message LoginRequest {
-    user user = 1;
+    User user = 1;
     string open_id = 2 [json_name = "open_id"];
     string service = 3 [json_name = "service"];
 }
@@ -34,13 +34,13 @@ message CredentialResponse {
 }
 
 message ListUserRequest {
-    user user = 1;
+    User user = 1;
     string open_id = 2 [json_name = "open_id"];
     string service = 3 [json_name = "service"];
 }
 
 message ListUserResponse {
-    repeated user user = 1;
+    repeated User user = 1;
     metadata metadata = 2;
 
 }
@@ -52,7 +52,7 @@ message token {
     string cookie = 4 [json_name = "cookie"];
 }
 
-message user {
+message User {
     int32 id = 1 [json_name = "id"];
     string name = 2 [json_name = "name"];
     string image = 3 [json_name = "image"];

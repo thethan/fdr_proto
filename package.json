@@ -1,0 +1,22 @@
+{
+  "name": "fdr_proto",
+  "version": "0.0.1",
+  "description": "This is talking to grpc over grpc-web on the front end",
+  "main": "draft_results_grpc_web_pb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thethan/fdr_proto.git"
+  },
+  "keywords": [
+    "grpc"
+  ],
+  "author": "Ethan Totten",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thethan/fdr_proto/issues"
+  },
+  "homepage": "https://github.com/thethan/fdr_proto#readme"
+}

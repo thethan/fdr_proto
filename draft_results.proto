@@ -4,21 +4,61 @@ syntax = "proto3";
 // for `package echo;` truss will create the directory "echo-service".
 package fdr;
 
+
 option go_package = "github.com/thethan/fdr_proto";
 
+import "google/protobuf/timestamp.proto";
 import "player.proto";
+import "users.proto";
 
-service DraftPlayer {
-    rpc DraftPlayer (DraftPlayerRequest) returns (DraftPlayerResponse) {
-    }
+enum League {
+    League_ALL = 0;
+    League_NFL = 1;
+    League_MLB = 2;
+    League_NBA = 3;
+    League_NHL = 4;
+    League_MLS = 5;
 }
 
+
+enum DraftType {
+    DraftType_Snake = 0;
+    DraftType_Traditional = 1;
+}
+
+message Season {
+    string ID = 1 [json_name = "id"];
+    string Year = 2 [json_name = "year"];
+    League league = 3 [json_name = "league"];
+    DraftType draft_type = 4 [json_name = "draft_type"];
+    google.protobuf.Timestamp draftTime = 5 [json_name = "draft_time"];
+    repeated User users = 6 [json_name = "users"];
+}
+
+
 message DraftPlayerRequest {
-    int32 player_id = 1 [json_name = "player_id"];
-    int32 draft_id = 2 [json_name = "draft_id"];
-    int32 user_id = 3 [json_name = ""];
+    Season season = 1 [json_name = "season"];
+    Player player = 2 [json_name = "player"];
+    User user = 3 [json_name = "user"];
 }
 
 message DraftPlayerResponse {
-    Player player = 1 [json_name = "player"];
+    Season season = 1 [json_name = "season"];
+    Player player = 2 [json_name = "player"];
+    User user = 3 [json_name = "user"];
+    int32 Order = 4 [json_name = "draft_order"];
+    google.protobuf.Timestamp draftTime = 5 [json_name = "draft_time"];
+}
+
+message DraftRequest {
+    Season season = 1 [json_name = "season"];
+    User user = 2 [json_name = "user"];
+}
+
+service DraftPlayer {
+    rpc DraftPlayer (DraftPlayerRequest) returns (DraftPlayerResponse) {}
+}
+
+service Draft {
+    rpc Draft (DraftRequest) returns (stream DraftPlayerResponse){}
 }
