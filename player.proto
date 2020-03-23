@@ -7,7 +7,6 @@ package fdr;
 option go_package = "github.com/thethan/fdr_proto";
 
 import "stats.proto";
-import "season.proto";
 import "player_positions.proto";
 
 service Players {
@@ -32,11 +31,10 @@ message Player {
     string image = 3 [json_name = "image"];
     repeated PlayerPosition positions = 4 [json_name = "positions"];
     repeated relations relations = 5;
-    repeated SeasonStats SeasonStats = 6;
+    map <string, SeasonStats> season_stats = 6;
 }
 
 message SeasonStats {
-    season season = 1;
     repeated stat stats = 2;
 }
 
