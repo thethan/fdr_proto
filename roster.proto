@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package fdr;
+
+option go_package = "github.com/thethan/fdr_proto";
+
+import "player_positions.proto";
+import "player.proto";
+
+message RosterSlot {
+    PlayerPosition position = 1 [json_name = "position"];
+    Player player = 2 [json_name = "player"];
+}
+
+message RosterRules {
+    PlayerPosition position = 1 [json_name = "position"];
+    int32 starting = 2 [json_name = "starting"];
+    int32 max = 3 [json_name = "max"];
+}

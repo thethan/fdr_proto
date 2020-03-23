@@ -8,6 +8,7 @@ package fdr;
 option go_package = "github.com/thethan/fdr_proto";
 
 import "google/protobuf/timestamp.proto";
+import "roster.proto";
 import "player.proto";
 import "users.proto";
 
@@ -33,21 +34,25 @@ message Season {
     DraftType draft_type = 4 [json_name = "draft_type"];
     google.protobuf.Timestamp draftTime = 5 [json_name = "draft_time"];
     repeated User users = 6 [json_name = "users"];
+    repeated User commissioners = 7 [json_name = "commissioners"];
+    repeated RosterRules roster = 8 [json_name = "roster"];
 }
 
 
 message DraftPlayerRequest {
-    Season season = 1 [json_name = "season"];
-    Player player = 2 [json_name = "player"];
-    User user = 3 [json_name = "user"];
+    int32 DraftResultID = 1 [json_name = "result_id"];
+    Season season = 2 [json_name = "season"];
+    Player player = 3 [json_name = "player"];
+    User user = 4 [json_name = "user"];
 }
 
 message DraftPlayerResponse {
-    Season season = 1 [json_name = "season"];
-    Player player = 2 [json_name = "player"];
-    User user = 3 [json_name = "user"];
-    int32 Order = 4 [json_name = "draft_order"];
-    google.protobuf.Timestamp draftTime = 5 [json_name = "draft_time"];
+    int32 DraftResultID = 1 [json_name = "result_id"];
+    Season season = 2 [json_name = "season"];
+    Player player = 3 [json_name = "player"];
+    User user = 4 [json_name = "user"];
+    int32 Order = 5 [json_name = "draft_order"];
+    google.protobuf.Timestamp draftTime = 6 [json_name = "draft_time"];
 }
 
 message DraftRequest {
@@ -56,9 +61,11 @@ message DraftRequest {
 }
 
 service DraftPlayer {
-    rpc DraftPlayer (DraftPlayerRequest) returns (DraftPlayerResponse) {}
+    rpc DraftPlayer (DraftPlayerRequest) returns (DraftPlayerResponse) {
+    }
 }
 
 service Draft {
-    rpc Draft (DraftRequest) returns (stream DraftPlayerResponse){}
+    rpc Draft (DraftRequest) returns (stream DraftPlayerResponse) {
+    }
 }
