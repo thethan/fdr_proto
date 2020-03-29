@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+// The package name determines the name of the directories that truss creates
+// for `package echo;` truss will create the directory "echo-service".
+package fdr;
+
+
+option go_package = "github.com/thethan/fdr_proto";
+
+import "google/protobuf/timestamp.proto";
+import "player.proto";
+import "player_positions.proto";
+import "users.proto";
+import "roster.proto";
+
+
+enum League {
+    League_ALL = 0;
+    League_NFL = 1;
+    League_MLB = 2;
+    League_NBA = 3;
+    League_NHL = 4;
+    League_MLS = 5;
+}
+
+
+enum DraftType {
+    DraftType_Snake = 0;
+    DraftType_Traditional = 1;
+}
+
+message Season {
+    string ID = 1 [json_name = "id"];
+    string Year = 2 [json_name = "year"];
+    League league = 3 [json_name = "league"];
+    DraftType draft_type = 4 [json_name = "draft_type"];
+    google.protobuf.Timestamp draftTime = 5 [json_name = "draft_time"];
+    repeated User users = 6 [json_name = "users"];
+    repeated User commissioners = 7 [json_name = "commissioners"];
+    repeated RosterRules roster = 8 [json_name = "roster"];
+}
+
+message CreateDraftRequest {
+    Season season = 1;
+}
+
+
+message CreateDraftResponse {
+    Season season = 1;
+}
+
+service Draft {
+    rpc CreateDraft (CreateDraftRequest) returns (CreateDraftResponse) {
+    }
+    rpc ListDraftsUserHasAccessTo (Season) returns (Season) {
+    }
+    rpc UpdateDraft (CreateDraftRequest) returns (CreateDraftResponse) {
+    }
+}
+
+// @todo league records by league
+// @todo records by user
+// @todo records by "game"
+
+message GetPlayersBySeasonRequest {
+    Season season = 1;
+    repeated PlayerPosition player_positions = 2;
+}
+
+
+message GetPlayersBySeasonResponse {
+    Season season = 1;
+    repeated Player players = 2;
+}
+
+
+message GetPlayersBySeasonAndUserRequest {
+    Season season = 1;
+    repeated PlayerPosition player_positions = 2;
+}
+
+message GetPlayersBySeasonAndUserResponse {
+    Season season = 1;
+    User user = 2;
+    repeated Player players = 3;
+}
+
+service PlayerService {
+    rpc GetPlayersTiedToASeason (GetPlayersBySeasonRequest) returns (GetPlayersBySeasonResponse) {
+    }
+    rpc GetPlayersBySeasonAndUserPreference (GetPlayersBySeasonAndUserRequest) returns (GetPlayersBySeasonAndUserResponse) {}
+}
+
+message ImportPlayerRequest {
+    Player player = 1;
+    map<string, int32> ranking = 2;
+    map<string, string> service_identifiers = 3;
+}
+
+message ImportPlayerResponse {
+    Player player = 1;
+}
+
+service ImportDraftPlayer {
+    rpc ImportPlayer (ImportPlayerRequest) returns (ImportPlayerResponse) {
+    }
+}
+

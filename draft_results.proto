@@ -8,35 +8,12 @@ package fdr;
 option go_package = "github.com/thethan/fdr_proto";
 
 import "google/protobuf/timestamp.proto";
-import "roster.proto";
 import "player.proto";
 import "users.proto";
-
-enum League {
-    League_ALL = 0;
-    League_NFL = 1;
-    League_MLB = 2;
-    League_NBA = 3;
-    League_NHL = 4;
-    League_MLS = 5;
-}
+import "draft.proto";
 
 
-enum DraftType {
-    DraftType_Snake = 0;
-    DraftType_Traditional = 1;
-}
 
-message Season {
-    string ID = 1 [json_name = "id"];
-    string Year = 2 [json_name = "year"];
-    League league = 3 [json_name = "league"];
-    DraftType draft_type = 4 [json_name = "draft_type"];
-    google.protobuf.Timestamp draftTime = 5 [json_name = "draft_time"];
-    repeated User users = 6 [json_name = "users"];
-    repeated User commissioners = 7 [json_name = "commissioners"];
-    repeated RosterRules roster = 8 [json_name = "roster"];
-}
 
 
 message DraftPlayerRequest {
@@ -61,11 +38,10 @@ message DraftRequest {
 }
 
 service DraftPlayer {
-    rpc DraftPlayer (DraftPlayerRequest) returns (DraftPlayerResponse) {
-    }
+    rpc DraftPlayer (DraftPlayerRequest) returns (DraftPlayerResponse) {}
 }
 
-service Draft {
+service DraftResults {
     rpc Draft (DraftRequest) returns (stream DraftPlayerResponse) {
     }
 }
