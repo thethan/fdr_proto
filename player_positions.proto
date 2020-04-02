@@ -12,7 +12,8 @@ enum PlayerPosition {
     RB = 2;
     WR = 3;
     TE = 4;
-    K = 5;
-    DEF = 6;
-    BN = 7;
+    WRT = 5;
+    K = 6;
+    DEF = 7;
+    BN = 8;
 }
