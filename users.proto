@@ -53,7 +53,7 @@ message token {
 }
 
 message User {
-    int32 id = 1 [json_name = "id"];
+    string id = 1 [json_name = "id"];
     string name = 2 [json_name = "name"];
     string image = 3 [json_name = "image"];
     string email = 4 [json_name = "email"];
