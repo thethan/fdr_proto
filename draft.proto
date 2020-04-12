@@ -31,13 +31,25 @@ enum DraftType {
 
 message Season {
     string ID = 1 [json_name = "id"];
-    string Year = 2 [json_name = "year"];
     League league = 3 [json_name = "league"];
     DraftType draft_type = 4 [json_name = "draft_type"];
     google.protobuf.Timestamp draftTime = 5 [json_name = "draft_time"];
     repeated User users = 6 [json_name = "users"];
     repeated User commissioners = 7 [json_name = "commissioners"];
     repeated RosterRules roster = 8 [json_name = "roster"];
+}
+
+message ExternalIdentifiers {
+    enum ExternalResources {
+        Unspecified = 0;
+        Yahoo = 1;
+        //        ESPN = 2;
+        //        NFL = 3;
+    }
+    repeated int32 years_active = 1;
+    ExternalResources external_source = 2;
+    string external_id = 3;
+
 }
 
 message CreateDraftRequest {
@@ -88,7 +100,8 @@ message GetPlayersBySeasonAndUserResponse {
 service PlayerService {
     rpc GetPlayersTiedToASeason (GetPlayersBySeasonRequest) returns (GetPlayersBySeasonResponse) {
     }
-    rpc GetPlayersBySeasonAndUserPreference (GetPlayersBySeasonAndUserRequest) returns (GetPlayersBySeasonAndUserResponse) {}
+    rpc GetPlayersBySeasonAndUserPreference (GetPlayersBySeasonAndUserRequest) returns (GetPlayersBySeasonAndUserResponse) {
+    }
 }
 
 message ImportPlayerRequest {
