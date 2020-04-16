@@ -37,6 +37,7 @@ message Season {
     repeated User users = 6 [json_name = "users"];
     repeated User commissioners = 7 [json_name = "commissioners"];
     repeated RosterRules roster = 8 [json_name = "roster"];
+    repeated ExternalIdentifiers external_identifiers = 9 ;
 }
 
 message ExternalIdentifiers {
