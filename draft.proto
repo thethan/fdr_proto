@@ -31,6 +31,7 @@ enum DraftType {
 
 message Season {
     string ID = 1 [json_name = "id"];
+    string Name = 2 [json_name = "name"];
     League league = 3 [json_name = "league"];
     DraftType draft_type = 4 [json_name = "draft_type"];
     google.protobuf.Timestamp draftTime = 5 [json_name = "draft_time"];
